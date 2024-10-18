@@ -6,7 +6,6 @@ import com.onlytrade.model.Venta;
 import com.onlytrade.repository.VentaRepository;
 import com.onlytrade.service.VentaService;
 
-import jakarta.persistence.EntityNotFoundException;
 
 public class VentaServiceImpl implements VentaService{
 		private VentaRepository ventaRepository;
@@ -24,16 +23,11 @@ public class VentaServiceImpl implements VentaService{
 
 	@Override
 	public void eliminarVenta(Integer ventaId) {
-	    
 	    Venta venta = ventaRepository.findById(ventaId).orElse(null);
-	    
 	    if (venta != null) {
-	      
 	        ventaRepository.delete(venta);
 	    }
-	   
 	}
-
 }
 
 
