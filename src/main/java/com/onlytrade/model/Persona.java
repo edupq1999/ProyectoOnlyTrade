@@ -7,6 +7,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -36,12 +38,16 @@ public class Persona {
 	@Column(name = "apellido", nullable = false)
 	private String apellido;
 	
-	@Column(name = "correo", nullable = false, unique = true)
-	private String correo;
-	
 	@Column(name = "rol", nullable = false)
 	private String rol;
 	
 	@Column(name = "fNacimiento", nullable = false)
 	private Date fNacimiento;
+
+	@Column(name = "fk_cuenta", nullable = false)
+    private String correo;
+
+	@OneToOne
+    @JoinColumn(name = "fk_cuenta", referencedColumnName = "correo", insertable = false, updatable = false)
+    private Cuenta cuenta;
 }
