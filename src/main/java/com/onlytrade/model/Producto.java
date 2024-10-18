@@ -7,6 +7,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -39,9 +41,10 @@ public class Producto {
 	@Column(name = "descripcion", nullable = false)
 	private String descripcion;
 	
-	@Column(name = "categoria", nullable = false)
-	private String categoria;
-	
 	@Column(name = "fEntrada", nullable = false)
 	private Date fEntrada;
+
+	@ManyToOne
+	@JoinColumn(name = "fk_categoria", referencedColumnName = "categoriaId", nullable = false)
+	private Categoria categoria;
 }
