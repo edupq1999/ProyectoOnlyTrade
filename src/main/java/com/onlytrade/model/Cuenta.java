@@ -22,6 +22,9 @@ public class Cuenta {
 	@Id
 	@Column(name = "user")
 	private Integer user;
+
+	@Column(name = "correo", nullable = false, unique = true)
+	private String correo;
 	
 	@Column(name = "password", nullable = false)
 	private String password;
