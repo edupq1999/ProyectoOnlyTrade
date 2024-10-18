@@ -7,6 +7,6 @@ import com.onlytrade.model.Persona;
 public interface PersonaService {
 	List<Persona>listarPersona();
 	void crearPersona(Persona newPersona);
-	void eliminarPersona(String NombrePersona);
+	void eliminarPersona(Integer usuarioId);
 	
 }

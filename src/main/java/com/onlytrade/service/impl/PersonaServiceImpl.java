@@ -6,8 +6,6 @@ import com.onlytrade.model.Persona;
 import com.onlytrade.repository.PersonaRepository;
 import com.onlytrade.service.PersonaService;
 
-import jakarta.persistence.EntityNotFoundException;
-
 
 public class PersonaServiceImpl implements PersonaService{
 	private PersonaRepository personaRepository;
@@ -24,15 +22,11 @@ public class PersonaServiceImpl implements PersonaService{
 	}
 
 	@Override
-	public void eliminarPersona(String NombrePersona) {
-	 
-	    Persona persona = (Persona) personaRepository.findByBuscarNombrePersona(NombrePersona);
-	    
-	    if (persona != null) {
-	       
+	public void eliminarPersona(Integer usuarioId) {
+	    Persona persona = personaRepository.findById(usuarioId).get();
+	    if (persona != null) {  
 	        personaRepository.delete(persona);
 	    }
-	    
 	}
 
 	
