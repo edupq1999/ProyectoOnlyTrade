@@ -6,7 +6,6 @@ import com.onlytrade.model.Cuenta;
 import com.onlytrade.repository.CuentaRepository;
 import com.onlytrade.service.CuentaService;
 
-import jakarta.persistence.EntityNotFoundException;
 
 public class CuentaServiceImpl implements CuentaService{
 		private CuentaRepository cuentaRepository;
@@ -25,19 +24,17 @@ public class CuentaServiceImpl implements CuentaService{
 	@Override
 	public void actualizarCuenta(Cuenta updatedCuenta) {
 		// TODO Auto-generated method stub
-		
+		Cuenta cuenta = cuentaRepository.findByBuscarCorreo(updatedCuenta.getCorreo());
+		cuenta.setRol(updatedCuenta.getRol());
+		cuentaRepository.save(cuenta);
 	}
 
 	@Override
-	public void eliminarVenta(Integer ventaId) {
-	    
-	    Cuenta cuenta = cuentaRepository.findById(ventaId).orElse(null);
-	    
+	public void eliminarCuenta(Integer cuentaId) {
+	    Cuenta cuenta = cuentaRepository.findById(cuentaId).orElse(null);
 	    if (cuenta != null) {
-	       
 	        cuentaRepository.delete(cuenta);
 	    }
-	   
 	}
 
 	

@@ -6,5 +6,5 @@ import com.onlytrade.model.Cuenta;
 
 
 public interface CuentaRepository extends JpaRepository<Cuenta, Integer>{
-
+    Cuenta findByBuscarCorreo(String correo);
 }
