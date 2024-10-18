@@ -22,12 +22,9 @@ import lombok.ToString;
 public class Roles {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer rolId;
-	
-	@Column(name = "nombre", nullable = false, unique = true)
-	private String nombre;
-	
-	@Column(name = "descripcion", nullable = false)
-	private String descripcion;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer rolId;
+
+    @Column(name = "nombre", nullable = false, unique = true)
+    private String nombre;
 }

@@ -3,6 +3,8 @@ package com.onlytrade.model;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,4 +27,9 @@ public class Cuenta {
 
     @Column(name = "password", nullable = false)
     private String password;
+
+    @ManyToOne
+    @JoinColumn(name = "fk_rol", referencedColumnName = "rolId", nullable = false)
+    private Roles rol;
+
 }
