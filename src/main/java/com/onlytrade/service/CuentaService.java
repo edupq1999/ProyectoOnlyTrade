@@ -9,4 +9,5 @@ public interface CuentaService {
 	void crearCuenta(Cuenta newCuenta);
 	void actualizarCuenta(Cuenta updatedCuenta);
 	void eliminarCuenta(String cuentaId);
+	Cuenta buscarPorCorreo(String correo);
 }

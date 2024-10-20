@@ -30,11 +30,17 @@ public class CuentaServiceImpl implements CuentaService{
 	}
 
 	@Override
-	public void eliminarCuenta(String cuentaId) {
-	    Cuenta cuenta = cuentaRepository.findById(cuentaId).orElse(null);
+	public void eliminarCuenta(String correo) {
+		Cuenta cuenta = buscarPorCorreo(correo);
 	    if (cuenta != null) {
 	        cuentaRepository.delete(cuenta);
 	    }
+	}
+
+	@Override
+	public Cuenta buscarPorCorreo(String correo) {
+		Cuenta cuenta = cuentaRepository.findById(correo).orElse(null);
+		return cuenta;
 	}
 
 	
