@@ -8,5 +8,5 @@ import com.onlytrade.model.Producto;
 
 
 public interface ProductoRepository extends JpaRepository<Producto, Integer>{
-	List<Producto>findByBuscarNombreProducto(String NombreProducto);
+	List<Producto>findByNombre(String NombreProducto);
 }
