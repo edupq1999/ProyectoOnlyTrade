@@ -5,6 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.onlytrade.model.Cuenta;
 
 
-public interface CuentaRepository extends JpaRepository<Cuenta, Integer>{
-    Cuenta findByBuscarCorreo(String correo);
+public interface CuentaRepository extends JpaRepository<Cuenta, String>{
+    Cuenta findByCorreo(String correo);
 }
