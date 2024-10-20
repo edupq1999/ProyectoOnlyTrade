@@ -24,13 +24,13 @@ public class CuentaServiceImpl implements CuentaService{
 	@Override
 	public void actualizarCuenta(Cuenta updatedCuenta) {
 		// TODO Auto-generated method stub
-		Cuenta cuenta = cuentaRepository.findByBuscarCorreo(updatedCuenta.getCorreo());
+		Cuenta cuenta = cuentaRepository.findByCorreo(updatedCuenta.getCorreo());
 		cuenta.setRol(updatedCuenta.getRol());
 		cuentaRepository.save(cuenta);
 	}
 
 	@Override
-	public void eliminarCuenta(Integer cuentaId) {
+	public void eliminarCuenta(String cuentaId) {
 	    Cuenta cuenta = cuentaRepository.findById(cuentaId).orElse(null);
 	    if (cuenta != null) {
 	        cuentaRepository.delete(cuenta);
