@@ -18,7 +18,7 @@ public class ProductoServiceImpl implements ProductoService{
 	@Override
 	public List<Producto> BuscarNombreProducto(String NombreProducto) {
 		// TODO Auto-generated method stub
-		return productoRepository.findByBuscarNombreProducto(NombreProducto);
+		return productoRepository.findByNombre(NombreProducto);
 	}
 	
 }
