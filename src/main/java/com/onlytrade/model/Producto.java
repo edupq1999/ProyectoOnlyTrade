@@ -43,6 +43,9 @@ public class Producto {
 	
 	@Column(name = "fEntrada", nullable = false)
 	private Date fEntrada;
+	
+	@Column(name = "categoriaId", nullable = false)
+	private Date categoriaId;
 
 	@ManyToOne
 	@JoinColumn(name = "fk_categoria", referencedColumnName = "categoriaId", nullable = false)
