@@ -7,7 +7,8 @@ import com.onlytrade.model.Cuenta;
 public interface CuentaService {
 	List<Cuenta>listarCuenta();
 	void crearCuenta(Cuenta newCuenta);
+	Cuenta buscarPorCorreo(String correo);
 	void actualizarCuenta(Cuenta updatedCuenta);
 	void eliminarCuenta(String cuentaId);
-	Cuenta buscarPorCorreo(String correo);
+	String iniciarSesion(String correo, String password);
 }
