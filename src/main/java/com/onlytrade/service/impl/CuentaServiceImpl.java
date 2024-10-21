@@ -4,11 +4,14 @@ import java.util.List;
 
 import com.onlytrade.model.Cuenta;
 import com.onlytrade.repository.CuentaRepository;
+import com.onlytrade.repository.RolesRepository;
 import com.onlytrade.service.CuentaService;
+import com.onlytrade.utils.Utilitarios;
 
+public class CuentaServiceImpl implements CuentaService {
+	private CuentaRepository cuentaRepository;
+	private RolesRepository rolesRepository;
 
-public class CuentaServiceImpl implements CuentaService{
-		private CuentaRepository cuentaRepository;
 	@Override
 	public List<Cuenta> listarCuenta() {
 		// TODO Auto-generated method stub
@@ -18,23 +21,10 @@ public class CuentaServiceImpl implements CuentaService{
 	@Override
 	public void crearCuenta(Cuenta newCuenta) {
 		// TODO Auto-generated method stub
+		String passwordHash = Utilitarios.extraerHash(newCuenta.getPassword());
+		newCuenta.setPassword(passwordHash);
+		newCuenta.setRol(rolesRepository.findAll().get(0));
 		cuentaRepository.save(newCuenta);
-	}
-
-	@Override
-	public void actualizarCuenta(Cuenta updatedCuenta) {
-		// TODO Auto-generated method stub
-		Cuenta cuenta = cuentaRepository.findByCorreo(updatedCuenta.getCorreo());
-		cuenta.setRol(updatedCuenta.getRol());
-		cuentaRepository.save(cuenta);
-	}
-
-	@Override
-	public void eliminarCuenta(String correo) {
-		Cuenta cuenta = buscarPorCorreo(correo);
-	    if (cuenta != null) {
-	        cuentaRepository.delete(cuenta);
-	    }
 	}
 
 	@Override
@@ -43,5 +33,32 @@ public class CuentaServiceImpl implements CuentaService{
 		return cuenta;
 	}
 
-	
+	@Override
+	public void actualizarCuenta(Cuenta updatedCuenta) {
+		// TODO Auto-generated method stub
+		Cuenta cuenta = buscarPorCorreo(updatedCuenta.getCorreo());
+		cuenta.setRol(updatedCuenta.getRol());
+		cuentaRepository.save(cuenta);
+	}
+
+	@Override
+	public void eliminarCuenta(String correo) {
+		Cuenta cuenta = buscarPorCorreo(correo);
+		if (cuenta != null) {
+			cuentaRepository.delete(cuenta);
+		}
+	}
+
+	@Override
+	public String iniciarSesion(String correo, String password) {
+		Cuenta cuenta = buscarPorCorreo(correo);
+		if (cuenta == null) {
+			return "El correo no existe";
+		} else if (!Utilitarios.checkPassword(password, cuenta.getPassword())) {
+			return "Contraseña incorrecta";
+		} else {
+			return "Logrado";
+		}
+	}
+
 }
