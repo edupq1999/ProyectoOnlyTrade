@@ -2,11 +2,13 @@ package com.onlytrade.service.impl;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.onlytrade.model.Venta;
 import com.onlytrade.repository.VentaRepository;
 import com.onlytrade.service.VentaService;
 
-
+@Service
 public class VentaServiceImpl implements VentaService{
 		private VentaRepository ventaRepository;
 	@Override

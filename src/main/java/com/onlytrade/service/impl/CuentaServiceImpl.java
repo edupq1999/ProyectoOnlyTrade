@@ -2,12 +2,14 @@ package com.onlytrade.service.impl;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.onlytrade.model.Cuenta;
 import com.onlytrade.repository.CuentaRepository;
 import com.onlytrade.repository.RolesRepository;
 import com.onlytrade.service.CuentaService;
 import com.onlytrade.utils.Utilitarios;
-
+@Service
 public class CuentaServiceImpl implements CuentaService {
 	private CuentaRepository cuentaRepository;
 	private RolesRepository rolesRepository;

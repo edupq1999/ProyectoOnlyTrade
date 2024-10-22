@@ -10,7 +10,6 @@ import com.onlytrade.model.Roles;
 import com.onlytrade.service.CuentaService;
 import com.onlytrade.service.RolesService;
 
-
 @Controller
 public class CuentaController {
 

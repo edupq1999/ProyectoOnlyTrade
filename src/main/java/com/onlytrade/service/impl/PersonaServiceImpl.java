@@ -2,6 +2,7 @@ package com.onlytrade.service.impl;
 
 import java.util.List;
 
+import com.onlytrade.model.Cuenta;
 import com.onlytrade.model.Persona;
 import com.onlytrade.repository.PersonaRepository;
 import com.onlytrade.service.PersonaService;
@@ -28,6 +29,11 @@ public class PersonaServiceImpl implements PersonaService{
 	        personaRepository.delete(persona);
 	    }
 	}
+
+	@Override
+	public Persona buscarPorUsuarioId(Integer usuarioId) {
+		    return personaRepository.findById(usuarioId).orElse(null);
+		}
 
 	
 }
