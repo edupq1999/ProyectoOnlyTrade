@@ -57,7 +57,7 @@ public class CuentaServiceImpl implements CuentaService {
 		} else if (!Utilitarios.checkPassword(password, cuenta.getPassword())) {
 			return "Contraseña incorrecta";
 		} else {
-			return "Logrado";
+			return "Exitoso";
 		}
 	}
 

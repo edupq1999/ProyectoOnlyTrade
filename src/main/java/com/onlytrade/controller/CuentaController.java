@@ -67,7 +67,7 @@ public class CuentaController {
     @PostMapping("/login")
     public String iniciarSesion(@RequestParam String correo, @RequestParam String password, Model model) {
         String resultadoLogin = cuentaService.iniciarSesion(correo, password);
-        if (!resultadoLogin.equals("Logrado")) {
+        if (!resultadoLogin.equals("Exitoso")) {
             model.addAttribute("error", resultadoLogin);
             return "login";
         }
