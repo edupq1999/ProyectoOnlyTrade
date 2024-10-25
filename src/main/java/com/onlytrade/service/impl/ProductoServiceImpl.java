@@ -12,12 +12,6 @@ public class ProductoServiceImpl implements ProductoService {
 	ProductoRepository productoRepository;
 
 	@Override
-	public List<Producto> listarProducto() {
-		// TODO Auto-generated method stub
-		return productoRepository.findAll();
-	}
-
-	@Override
 	public List<Producto> BuscarNombreProducto(String NombreProducto) {
 		// TODO Auto-generated method stub
 		return productoRepository.findByNombre(NombreProducto);
@@ -30,9 +24,9 @@ public class ProductoServiceImpl implements ProductoService {
 	}
 
 	@Override
-	public void registrarProducto(Producto producto) {
-		productoRepository.save(producto);
-		
+	public Producto buscarProductoPorId(Integer idProducto) {
+		// TODO Auto-generated method stub
+		return productoRepository.findById(idProducto).get();
 	}
 
 }

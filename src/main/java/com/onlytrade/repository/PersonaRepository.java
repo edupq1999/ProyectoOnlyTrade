@@ -6,5 +6,5 @@ import com.onlytrade.model.Persona;
 
 
 public interface PersonaRepository extends JpaRepository<Persona, Integer>{
-
+    Persona findByCorreo(String correo);
 }
