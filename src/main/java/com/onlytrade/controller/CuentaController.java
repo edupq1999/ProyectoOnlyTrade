@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import com.onlytrade.model.Cuenta;
+import com.onlytrade.model.Persona;
 import com.onlytrade.model.Roles;
 import com.onlytrade.service.CuentaService;
 import com.onlytrade.service.RolesService;
@@ -30,13 +31,14 @@ public class CuentaController {
     @GetMapping("/registrar_cuenta")
     public String mostrarCuenta(Model model) {
     	model.addAttribute("cuenta", new Cuenta());
+        model.addAttribute("persona", new Persona());
         return "registrar_cuenta";
     }
     
     @PostMapping("/registrar_cuenta")
-	public String registrarCuenta(@ModelAttribute("cuenta") Cuenta newCuenta,
+	public String registrarCuenta(@ModelAttribute("cuenta") Cuenta newCuenta,@ModelAttribute("persona") Persona newPersona,
 			Model model) {
-    	cuentaService.crearCuenta(newCuenta);
+    	cuentaService.crearCuenta(newCuenta, newPersona);
 		return "listar_cuentas";
 	}
 
@@ -51,11 +53,10 @@ public class CuentaController {
     }
 
     // Eliminar una cuenta
-    @PostMapping("/eliminar/{correo}")
+    @GetMapping("/eliminar/{correo}")
     public String eliminarCuenta(@PathVariable String correo) {
     	Cuenta cuenta = cuentaService.buscarPorCorreo(correo);
     	if (cuenta == null) {
-    		// Posible alerta
             return "La cuenta no existe";
         }
     	cuentaService.eliminarCuenta(correo);

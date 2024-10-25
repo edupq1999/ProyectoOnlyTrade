@@ -9,67 +9,48 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.onlytrade.model.Categoria;
 import com.onlytrade.model.Producto;
 import com.onlytrade.service.CategoriaService;
 import com.onlytrade.service.ProductoService;
+
 @Controller
 public class ProductoController {
-	
+
 	@Autowired
-    private ProductoService productoService;
+	private ProductoService productoService;
 	@Autowired
-    private CategoriaService categoriaService;
-	
-	//LISTAR PRODUCTO///
-	
-		@GetMapping("/lista_producto")
-		public String listarProducto(Model model) {
-			List<Producto>listaProducto = productoService.listarProducto();
-			model.addAttribute("listpro", listaProducto);
-			return "lista_producto";
-		}
-		
-					//REGISTRAR PRODUCTO//
-		
-		@GetMapping("/registrar_producto")
-		public String mostrarRegistrarProducto(Model model) {
-			List<Categoria>listaCategoria= categoriaService.listarCategoria();
-			model.addAttribute("categorias",listaCategoria);
-			model.addAttribute("producto", new Producto());
-		return "registrar_producto";
-		}
-		
-		@PostMapping("/registrar_producto")
-		public String registrarProducto(@ModelAttribute("producto") Producto pro
-				, Model model) {
-			
-			productoService.registrarProducto(pro);
-			return "redirect:/lista_producto/";
-			
-		}
-	
-						//LISTAR POR CATEGORIA///
-		
-		@GetMapping("/categoria_producto/{idCategoria}")
-		public String verDetalleCategoria(Model model, @PathVariable("idCategoria") Integer idCategoria) {
-			List<Producto>listaProductoCat = productoService.listarProductoPorCategoria(idCategoria);
-			model.addAttribute("listaProductoCat", listaProductoCat);
-		return "categoria_producto";
-		}
-		
-		
-		
-		
-		
-		
-		
-		
-		
+	private CategoriaService categoriaService;
 
+	// Listar productos por nombre
+	@PostMapping("/home")
+	public String listarProductoPorNombre(Model model, @ModelAttribute("input") String nombre) {
+		List<Producto> listaProducto = productoService.BuscarNombreProducto(nombre);
+		model.addAttribute("lstProductos", listaProducto);
+		return "lista_producto";
+	}
 
+	// Listar productos por categoria
+	@PostMapping("/home")
+	public String listarPorCategoria(Model model, @ModelAttribute("categoriaId") Integer categoriaId) {
+		List<Producto> listaProducto = productoService.listarProductoPorCategoria(categoriaId);
+		model.addAttribute("lstProductos", listaProducto);
+		return "lista_producto";
+	}
 
+	// Listar categorias
+	@GetMapping("/home")
+	public String listarCategorias(Model model) {
+		List<Categoria> listaCategorias = categoriaService.listarCategoria();
+		model.addAttribute("lstCategorias", listaCategorias);
+		return "home";
+	}
 
+	@GetMapping("/producto/{id}")
+	public String detalleProducto(Model model, @PathVariable Integer idProducto) {
+		Producto producto = productoService.buscarProductoPorId(idProducto);
+		model.addAttribute("producto", producto);
+		return "/producto/{id}";
+	}
 }
