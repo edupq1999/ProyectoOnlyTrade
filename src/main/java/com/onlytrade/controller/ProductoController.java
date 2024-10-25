@@ -24,19 +24,19 @@ public class ProductoController {
 	private CategoriaService categoriaService;
 
 	// Listar productos por nombre
-	@PostMapping("/home")
+	@PostMapping("/home/buscarPorNombre")
 	public String listarProductoPorNombre(Model model, @ModelAttribute("input") String nombre) {
 		List<Producto> listaProducto = productoService.BuscarNombreProducto(nombre);
 		model.addAttribute("lstProductos", listaProducto);
-		return "lista_producto";
+		return "redirect:/lista_producto";
 	}
 
 	// Listar productos por categoria
-	@PostMapping("/home")
+	@PostMapping("/home/buscarPorCategoria")
 	public String listarPorCategoria(Model model, @ModelAttribute("categoriaId") Integer categoriaId) {
 		List<Producto> listaProducto = productoService.listarProductoPorCategoria(categoriaId);
 		model.addAttribute("lstProductos", listaProducto);
-		return "lista_producto";
+		return "redirect:/lista_producto";
 	}
 
 	// Listar categorias

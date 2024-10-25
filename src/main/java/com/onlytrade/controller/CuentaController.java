@@ -39,7 +39,7 @@ public class CuentaController {
 	public String registrarCuenta(@ModelAttribute("cuenta") Cuenta newCuenta,@ModelAttribute("persona") Persona newPersona,
 			Model model) {
     	cuentaService.crearCuenta(newCuenta, newPersona);
-		return "listar_cuentas";
+		return "redirect:/listar_cuentas";
 	}
 
     // Actualizar cuenta a moderador
@@ -49,7 +49,7 @@ public class CuentaController {
     	Roles admin = rolesService.listarRoles().get(1);
     	updatedCuenta.setRol(admin);
     	cuentaService.actualizarCuenta(updatedCuenta);
-        return "listar_cuentas";
+        return "redirect:/listar_cuentas";
     }
 
     // Eliminar una cuenta
@@ -60,7 +60,7 @@ public class CuentaController {
             return "La cuenta no existe";
         }
     	cuentaService.eliminarCuenta(correo);
-        return "listar_cuentas";
+        return "redirect:/listar_cuentas";
     }
 
     // Iniciar sesión
@@ -74,8 +74,8 @@ public class CuentaController {
         Cuenta cuenta = cuentaService.buscarPorCorreo(correo);
         Roles rol = rolesService.listarRoles().get(1);
         if(cuenta.getRol().equals(rol)) {
-        	return "admin";
+        	return "redirect:/admin";
         }
-        return "home";
+        return "redirect:/home";
     }
 }
