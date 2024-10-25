@@ -18,7 +18,6 @@ import com.onlytrade.service.PersonaService;
 import com.onlytrade.service.ProductoService;
 import com.onlytrade.service.VentaService;
 @Controller
-@RequestMapping("/venta")
 public class VentaController {
 
 	 @Autowired
@@ -32,7 +31,7 @@ public class VentaController {
 	    
         //LISTAR VENTA///
 		
-		@GetMapping("/ventas")
+		@GetMapping("/lista_Venta")
 		public String listarVentas(Model model) {
 			List<Venta>listaVenta = ventaService.listarVenta();
 			model.addAttribute("listaventa", listaVenta);
@@ -57,7 +56,7 @@ public class VentaController {
 				, Model model) {
 			
 			ventaService.crearVenta(vent);
-			return "redirect:/venta/";
+			return "redirect:/lista_Venta/";
 			
 		}
 		
@@ -66,7 +65,7 @@ public class VentaController {
 		@GetMapping("/delete/{ventaId}")
 		public String deleteVenta(Model model, @PathVariable("ventaId") Integer ventaId) {
 			ventaService.eliminarVenta(ventaId);
-			return "redirect:/venta/";
+			return "redirect:/lista_Venta";
 		}
 		
 		

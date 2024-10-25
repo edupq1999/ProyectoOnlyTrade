@@ -16,7 +16,6 @@ import com.onlytrade.model.Producto;
 import com.onlytrade.service.CategoriaService;
 import com.onlytrade.service.ProductoService;
 @Controller
-@RequestMapping("/producto")
 public class ProductoController {
 	
 	@Autowired
@@ -26,7 +25,7 @@ public class ProductoController {
 	
 	//LISTAR PRODUCTO///
 	
-		@GetMapping("/Producto")
+		@GetMapping("/lista_producto")
 		public String listarProducto(Model model) {
 			List<Producto>listaProducto = productoService.listarProducto();
 			model.addAttribute("listpro", listaProducto);
@@ -48,7 +47,7 @@ public class ProductoController {
 				, Model model) {
 			
 			productoService.registrarProducto(pro);
-			return "redirect:/producto/";
+			return "redirect:/lista_producto/";
 			
 		}
 	
