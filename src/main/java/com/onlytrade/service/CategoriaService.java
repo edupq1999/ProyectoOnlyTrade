@@ -6,4 +6,5 @@ import com.onlytrade.model.Categoria;
 
 public interface CategoriaService {
 	List<Categoria>listarCategoria();
+	Categoria buscarCategoriaPorId(Integer categoriaId);
 }
