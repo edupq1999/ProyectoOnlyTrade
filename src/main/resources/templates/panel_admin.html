@@ -48,13 +48,10 @@ body {
 </style>
 <script>
 	function mostrarLista(lista) {
-		// Oculta ambas listas
 		document.getElementById("listaVentas").style.display = "none";
 		document.getElementById("listaCuentas").style.display = "none";
-		// Muestra la lista seleccionada
 		document.getElementById(lista).style.display = "block";
 	}
-	// Muestra la lista de ventas al cargar la página
 	window.onload = function() {
 		mostrarLista("listaVentas");
 	}
@@ -120,7 +117,6 @@ body {
 		</div>
 
 
-		<!-- Contenedor de la lista de Cuentas -->
 		<div id="listaCuentas" class="card" style="display: none;">
 			<div class="card-header">
 				<h4 id="tituloListaCuentas">Lista de Cuentas</h4>

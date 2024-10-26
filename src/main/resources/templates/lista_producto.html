@@ -1,102 +1,98 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-<meta charset="UTF-8">
-<title>OnlyTrade - Lista de Productos</title>
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-<script
-	src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<style>
-body {
-	background-color: #ffffff;
-}
+    <meta charset="UTF-8">
+    <title>OnlyTrade - Lista de Productos</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+        body {
+            background-color: #ffffff;
+        }
 
-.navbar {
-	background-color: #ff5722;
-}
+        .navbar {
+            background-color: #ff5722;
+        }
 
-.navbar-brand {
-	color: #ffffff;
-}
+        .navbar-brand {
+            color: #ffffff;
+        }
 
-.navbar .btn-danger {
-	background-color: #ff7043;
-	border: none;
-}
+        .navbar .btn-danger {
+            background-color: #ff7043;
+            border: none;
+        }
 
-.navbar .btn-danger:hover {
-	background-color: #ff5722;
-}
+        .navbar .btn-danger:hover {
+            background-color: #ff5722;
+        }
 
-.card {
-	border: none;
-	transition: transform 0.2s;
-}
+        .card {
+            border: none;
+            transition: transform 0.2s;
+        }
 
-.card:hover {
-	transform: scale(1.05);
-}
+        .card:hover {
+            transform: scale(1.05);
+        }
 
-.card img {
-	max-height: 200px;
-	object-fit: cover;
-}
-</style>
+        .card img {
+            max-height: 200px;
+            object-fit: cover;
+        }
+    </style>
 </head>
+
 <body>
-	<nav class="navbar navbar-expand-lg navbar-light">
-		<a class="navbar-brand" href="#">OnlyTrade</a>
-		<div class="collapse navbar-collapse justify-content-between">
-			<div class="collapse navbar-collapse justify-content-between">
-				<form class="form-inline"
-					th:action="@{/home/buscarPorNombre/{cadena}(cadena=${cadena})}"
-					method="post">
-					<input class="form-control mr-sm-2" type="search"
-						placeholder="Buscar productos" aria-label="Search" name="cadena"
-						th:value="${cadena}">
-					<button class="btn btn-outline-light my-2 my-sm-0" type="submit">Buscar</button>
-				</form>
-				<a class="btn btn-danger my-2 my-sm-0" href="/logout">Cerrar
-					sesión</a>
-			</div>
-		</div>
-	</nav>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" href="#">OnlyTrade</a>
+        <div class="collapse navbar-collapse justify-content-between">
+            <div class="collapse navbar-collapse justify-content-between">
+                <form class="form-inline" th:action="@{/home/buscarPorNombre}" method="get">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Buscar productos" aria-label="Search"
+                        name="cadena" th:value="${cadena}">
+                    <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Buscar</button>
+                </form>
+                <a class="btn btn-danger my-2 my-sm-0" href="/logout">Cerrar
+                    sesión</a>
+            </div>
+        </div>
+    </nav>
 
-	<div class="container mt-4">
-		<h2>Lista de Productos</h2>
-		<div class="row">
-			<div class="col-md-4" th:each="producto : ${lstProductos}">
-				<div class="card mb-4">
-					<!-- <img th:src="@{${producto.imagen}}" class="card-img-top"
+    <div class="container mt-4">
+        <h2>Lista de Productos</h2>
+        <div class="row">
+            <div class="col-md-4" th:each="producto : ${lstProductos}">
+                <div class="card mb-4">
+                    <!-- <img th:src="@{${producto.imagen}}" class="card-img-top"
 						alt="Producto"> -->
-					<div class="card-body">
-						<h5 class="card-title" th:text="${producto.nombre}">Nombre
-							Producto</h5>
-						<p class="card-text" th:text="${producto.descripcion}">Descripción
-							del producto.</p>
-						<p class="card-text">
-							<small class="text-muted"
-								th:text="'Precio: $' + ${producto.precio}">Precio: $0.00</small>
-						</p>
-						<a th:href="@{/producto/{id}(id=${producto.productoId})}"
-							class="btn btn-primary">Ver Detalle</a>
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${producto.nombre}">Nombre
+                            Producto</h5>
+                        <p class="card-text" th:text="${producto.descripcion}">Descripción
+                            del producto.</p>
+                        <p class="card-text">
+                            <small class="text-muted" th:text="'Precio: $' + ${producto.precio}">Precio: $0.00</small>
+                        </p>
+                        <a th:href="@{/producto/{id}(id=${producto.productoId})}" class="btn btn-primary">Ver
+                            Detalle</a>
 
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-	<script>
-		$(document).ready(function() {
-			$('.carousel').carousel({
-				interval : 2000
-			});
-		});
-	</script>
+    <script>
+        $(document).ready(function () {
+            $('.carousel').carousel({
+                interval: 2000
+            });
+        });
+    </script>
 </body>
+
 </html>
