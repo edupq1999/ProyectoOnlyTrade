@@ -2,6 +2,7 @@ package com.onlytrade.service.impl;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.onlytrade.model.Venta;
@@ -9,8 +10,11 @@ import com.onlytrade.repository.VentaRepository;
 import com.onlytrade.service.VentaService;
 
 @Service
-public class VentaServiceImpl implements VentaService{
-		private VentaRepository ventaRepository;
+public class VentaServiceImpl implements VentaService {
+
+	@Autowired
+	private VentaRepository ventaRepository;
+
 	@Override
 	public List<Venta> listarVenta() {
 		// TODO Auto-generated method stub
@@ -25,11 +29,9 @@ public class VentaServiceImpl implements VentaService{
 
 	@Override
 	public void eliminarVenta(Integer ventaId) {
-	    Venta venta = ventaRepository.findById(ventaId).orElse(null);
-	    if (venta != null) {
-	        ventaRepository.delete(venta);
-	    }
+		Venta venta = ventaRepository.findById(ventaId).orElse(null);
+		if (venta != null) {
+			ventaRepository.delete(venta);
+		}
 	}
 }
-
-

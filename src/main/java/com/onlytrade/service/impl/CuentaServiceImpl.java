@@ -2,21 +2,24 @@ package com.onlytrade.service.impl;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.onlytrade.model.Cuenta;
-import com.onlytrade.model.Persona;
+import com.onlytrade.model.Roles;
 import com.onlytrade.repository.CuentaRepository;
-import com.onlytrade.repository.PersonaRepository;
 import com.onlytrade.repository.RolesRepository;
 import com.onlytrade.service.CuentaService;
-import com.onlytrade.service.PersonaService;
+import com.onlytrade.service.RolesService;
 import com.onlytrade.utils.Utilitarios;
 @Service
-public class CuentaServiceImpl implements CuentaService, PersonaService {
+public class CuentaServiceImpl implements CuentaService, RolesService {
+	
+	@Autowired
 	private CuentaRepository cuentaRepository;
+	
+	@Autowired
 	private RolesRepository rolesRepository;
-	private PersonaRepository personaRepository;
 
 	@Override
 	public List<Cuenta> listarCuenta() {
@@ -25,13 +28,15 @@ public class CuentaServiceImpl implements CuentaService, PersonaService {
 	}
 
 	@Override
-	public void crearCuenta(Cuenta newCuenta, Persona newPersona) {
+	public void crearCuenta(Cuenta newCuenta) {
 		// TODO Auto-generated method stub
 		String passwordHash = Utilitarios.extraerHash(newCuenta.getPassword());
 		newCuenta.setPassword(passwordHash);
-		newCuenta.setRol(rolesRepository.findAll().get(0));
-		cuentaRepository.save(newCuenta);
-		crearPersona(newPersona);
+		List<Roles> roles = listarRoles();
+	    if (roles != null && roles.size() > 1) {
+	        newCuenta.setRol(roles.get(1));
+	    }
+	    cuentaRepository.save(newCuenta);
 	}
 
 	@Override
@@ -54,10 +59,6 @@ public class CuentaServiceImpl implements CuentaService, PersonaService {
 		if (cuenta != null) {
 			cuentaRepository.delete(cuenta);
 		}
-		Persona persona = buscarPorUsuarioCorreo(correo);
-	    if (persona != null) {  
-	        personaRepository.delete(persona);
-	    }
 	}
 
 	@Override
@@ -71,25 +72,11 @@ public class CuentaServiceImpl implements CuentaService, PersonaService {
 			return "Exitoso";
 		}
 	}
-
+	
 	@Override
-	public void crearPersona(Persona newPersona) {
+	public List<Roles> listarRoles() {
 		// TODO Auto-generated method stub
-		personaRepository.save(newPersona);;
-	}
-
-	@Override
-	public Persona buscarPorUsuarioCorreo(String correo) {
-		// TODO Auto-generated method stub
-		return personaRepository.findByCorreo(correo);
-	}
-
-	@Override
-	public void eliminarPersona(String correo) {
-		Persona persona = buscarPorUsuarioCorreo(correo);
-	    if (persona != null) {  
-	        personaRepository.delete(persona);
-	    }
+		return rolesRepository.findAll();
 	}
 
 }
