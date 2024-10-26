@@ -53,8 +53,9 @@ public class ProductoController {
 
 	@GetMapping("/producto/{id}")
 	public String detalleProducto(Model model, @PathVariable Integer id) {
+		System.out.println("ID recibido: " + id); // Agrega esta línea para depurar
 		Producto producto = productoService.buscarProductoPorId(id);
 		model.addAttribute("producto", producto);
-		return "/producto/{id}";
+		return "/producto";
 	}
 }

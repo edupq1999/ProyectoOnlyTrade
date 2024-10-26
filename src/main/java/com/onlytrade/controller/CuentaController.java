@@ -43,7 +43,7 @@ public class CuentaController {
 		Roles admin = rolesService.listarRoles().get(1);
 		updatedCuenta.setRol(admin);
 		cuentaService.actualizarCuenta(updatedCuenta);
-		return "redirect:/listar_cuentas";
+		return "redirect:/panel_admin";
 	}
 
 	// Eliminar una cuenta
@@ -54,7 +54,7 @@ public class CuentaController {
 			return "La cuenta no existe";
 		}
 		cuentaService.eliminarCuenta(correo);
-		return "redirect:/listar_cuentas";
+		return "redirect:/panel_admin";
 	}
 
 	// Iniciar sesión
@@ -73,7 +73,8 @@ public class CuentaController {
 		Cuenta cuenta = cuentaService.buscarPorCorreo(correo);
 		Roles rol = rolesService.listarRoles().get(0);
 		if (cuenta.getRol().equals(rol)) {
-			return "redirect:/admin";
+			System.out.println("Admin");
+			return "redirect:/panel_admin";
 		}
 		model.addAttribute("cuenta", cuenta);
 		return "redirect:/home";

@@ -65,7 +65,7 @@ public class VentaController {
 	@GetMapping("/delete/{ventaId}")
 	public String deleteVenta(Model model, @PathVariable("ventaId") Integer ventaId) {
 		ventaService.eliminarVenta(ventaId);
-		return "redirect:/lista_Venta";
+		return "redirect:/panel_admin";
 	}
 
 }
