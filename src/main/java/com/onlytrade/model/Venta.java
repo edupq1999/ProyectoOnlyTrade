@@ -13,15 +13,11 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.ToString;
 
 @Entity
 @Table(name = "tb_venta")
-@Getter
-@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
@@ -41,8 +37,8 @@ public class Venta {
     private Date fVenta;
 
     @ManyToOne
-    @JoinColumn(name = "fk_usuario", referencedColumnName = "usuarioId", nullable = false)
-    private Persona persona;
+    @JoinColumn(name = "fk_correo", referencedColumnName = "correo", nullable = false)
+    private Cuenta cuenta;
 
     @ManyToMany
     @JoinTable(
@@ -51,4 +47,54 @@ public class Venta {
         inverseJoinColumns = @JoinColumn(name = "producto_id")
     )
     private List<Producto> productos;
+
+	public Integer getVentaId() {
+		return ventaId;
+	}
+
+	public void setVentaId(Integer ventaId) {
+		this.ventaId = ventaId;
+	}
+
+	public Integer getCantidad() {
+		return cantidad;
+	}
+
+	public void setCantidad(Integer cantidad) {
+		this.cantidad = cantidad;
+	}
+
+	public Double getMontoTotal() {
+		return montoTotal;
+	}
+
+	public void setMontoTotal(Double montoTotal) {
+		this.montoTotal = montoTotal;
+	}
+
+	public Date getfVenta() {
+		return fVenta;
+	}
+
+	public void setfVenta(Date fVenta) {
+		this.fVenta = fVenta;
+	}
+
+	public Cuenta getCuenta() {
+		return cuenta;
+	}
+
+	public void setPersona(Cuenta correo) {
+		this.cuenta = cuenta;
+	}
+
+	public List<Producto> getProductos() {
+		return productos;
+	}
+
+	public void setProductos(List<Producto> productos) {
+		this.productos = productos;
+	}
+    
+    
 }
