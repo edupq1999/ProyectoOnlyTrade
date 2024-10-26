@@ -84,7 +84,7 @@ public class Venta {
 		return cuenta;
 	}
 
-	public void setPersona(Cuenta correo) {
+	public void setCuenta(Cuenta cuenta) {
 		this.cuenta = cuenta;
 	}
 
