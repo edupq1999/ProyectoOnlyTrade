@@ -74,13 +74,13 @@
     <div id="carouselExampleIndicators" class="carousel slide mt-3" data-ride="carousel">
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="image1.jpg" class="d-block w-100" alt="...">
+                <img src="https://plazavea.vteximg.com.br/arquivos/NF-SOLOXHOY-D-HR-20137623-26-10-2.webp" class="d-block w-100" alt="...">
             </div>
             <div class="carousel-item">
-                <img src="image2.jpg" class="d-block w-100" alt="...">
+                <img src="https://plazavea.vteximg.com.br/arquivos/F-SOLOXHOY-D-HR-20283494-26-10-2024-01.webp" alt="...">
             </div>
             <div class="carousel-item">
-                <img src="image3.jpg" class="d-block w-100" alt="...">
+                <img src="https://plazavea.vteximg.com.br/arquivos/NF-SOLOXHOY-D-HR-11515518-26OCT-3.webp" class="d-block w-100" alt="...">
             </div>
         </div>
         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev"> <span
@@ -96,7 +96,7 @@
             <div class="col-md-4" th:each="categoria : ${lstCategorias}">
                 <div class="card mb-4">
                     <div class="card-body">
-                        <!-- img th:src="@{${categoria.imagen}}" class="card-img-top" alt="Categoría" -->
+                        <img th:src="@{${categoria.url}}" class="card-img-top" alt="Categoría">
                         <h5 class="card-title" th:text="${categoria.nombre}">Nombre
                             Categoría</h5>
                         <a th:href="@{/home/buscarPorCategoria/{id}(id=${categoria.categoriaId})}"

@@ -16,16 +16,19 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 public class Categoria {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer categoriaId;
-	
+
 	@Column(name = "nombre", nullable = false, unique = true)
 	private String nombre;
-	
+
 	@Column(name = "descripcion", nullable = false)
 	private String descripcion;
+
+	@Column(name = "url", nullable = false)
+	private String url;
 
 	public Integer getCategoriaId() {
 		return categoriaId;
@@ -50,6 +53,13 @@ public class Categoria {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-	
-	
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
 }

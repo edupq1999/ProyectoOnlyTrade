@@ -42,6 +42,9 @@ public class Producto {
 
 	@Column(name = "descripcion", nullable = false)
 	private String descripcion;
+	
+	@Column(name = "url", nullable = false)
+	private String url;
 
 	@Column(name = "fEntrada", nullable = false)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -106,5 +109,15 @@ public class Producto {
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
 	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+	
+	
 
 }
