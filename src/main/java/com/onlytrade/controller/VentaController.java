@@ -52,8 +52,8 @@ public class VentaController {
 		nuevaVenta.setProductos(List.of(producto));
 
 		String correoUsuario = (String) session.getAttribute("usuarioCorreo");
-		Cuenta persona = cuentaService.buscarPorCorreo(correoUsuario);
-		nuevaVenta.setPersona(persona);
+		Cuenta cuenta = cuentaService.buscarPorCorreo(correoUsuario);
+		nuevaVenta.setCuenta(cuenta);
 		nuevaVenta.setfVenta(new Date());
 
 		ventaService.crearVenta(nuevaVenta);

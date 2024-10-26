@@ -8,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.onlytrade.model.Categoria;
@@ -25,9 +24,8 @@ public class ProductoController {
 	@Autowired
 	private CategoriaService categoriaService;
 
-	// Listar productos por nombre
-	@PostMapping("/home/buscarPorNombre/{cadena}")
-	public String listarProductoPorNombre(Model model, @PathVariable String cadena) {
+	@GetMapping("/home/buscarPorNombre")
+	public String listarProductoPorNombre(Model model, @RequestParam String cadena) {
 		List<Producto> listaProducto = productoService.BuscarNombreProducto(cadena);
 		System.out.println(cadena);
 		model.addAttribute("lstProductos", listaProducto);
