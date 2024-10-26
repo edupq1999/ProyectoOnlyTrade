@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.onlytrade.model.Persona;
+import com.onlytrade.model.Cuenta;
 import com.onlytrade.model.Producto;
 import com.onlytrade.model.Venta;
-import com.onlytrade.service.PersonaService;
+import com.onlytrade.service.CuentaService;
 import com.onlytrade.service.ProductoService;
 import com.onlytrade.service.VentaService;
 
@@ -28,16 +28,9 @@ public class VentaController {
 
 	@Autowired
 	private ProductoService productoService;
+	
 	@Autowired
-	private PersonaService personaService;
-
-	// Listar ventas
-	@GetMapping("/lista_Venta")
-	public String listarVentas(Model model) {
-		List<Venta> listaVenta = ventaService.listarVenta();
-		model.addAttribute("lstVentas", listaVenta);
-		return "lista_Venta";
-	}
+	private CuentaService cuentaService;
 
 	@PostMapping("/producto/{id}/venta")
 	public String registrarVentaDesdeProducto(
@@ -59,9 +52,9 @@ public class VentaController {
 		nuevaVenta.setProductos(List.of(producto));
 
 		String correoUsuario = (String) session.getAttribute("usuarioCorreo");
-		Persona persona = personaService.buscarPorUsuarioCorreo(correoUsuario);
+		Cuenta persona = cuentaService.buscarPorCorreo(correoUsuario);
 		nuevaVenta.setPersona(persona);
-		nuevaVenta.setFVenta(new Date());
+		nuevaVenta.setfVenta(new Date());
 
 		ventaService.crearVenta(nuevaVenta);
 
