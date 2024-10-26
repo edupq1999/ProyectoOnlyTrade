@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Reporte de Ventas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 8px 12px;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Reporte de Ventas</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID Venta</th>
+                <th>Cantidad</th>
+                <th>Monto Total</th>
+                <th>Fecha de Venta</th>
+                <th>Correo de Cuenta</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="venta : ${ventas}">
+                <td th:text="${venta.ventaId}">ID Venta</td>
+                <td th:text="${venta.cantidad}">Cantidad</td>
+                <td th:text="${venta.montoTotal}">Monto Total</td>
+                <td th:text="${#dates.format(venta.fVenta, 'yyyy-MM-dd')}">Fecha de Venta</td>
+                <td th:text="${venta.cuenta.correo}">Correo de Cuenta</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Panel de Control - OnlyTrade</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<style>
+body {
+	background-color: #f0f4f8;
+}
+
+.navbar {
+	background-color: blue;
+}
+
+.navbar-brand, .nav-link {
+	color: white !important;
+}
+
+.btn-primary {
+	background-color: orange;
+	border: none;
+}
+
+.btn-primary:hover {
+	background-color: orangered;
+}
+
+.card {
+	margin-top: 20px;
+	border: none;
+	border-radius: 10px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+	background-color: blue;
+	color: white;
+	text-align: center;
+}
+
+.table {
+	margin-top: 20px;
+	background-color: white;
+}
+</style>
+<script>
+	function mostrarLista(lista) {
+		// Oculta ambas listas
+		document.getElementById("listaVentas").style.display = "none";
+		document.getElementById("listaCuentas").style.display = "none";
+		// Muestra la lista seleccionada
+		document.getElementById(lista).style.display = "block";
+	}
+	// Muestra la lista de ventas al cargar la página
+	window.onload = function() {
+		mostrarLista("listaVentas");
+	}
+</script>
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg">
+		<a class="navbar-brand" href="#">OnlyTrade Admin</a>
+		<ul class="navbar-nav ml-auto">
+			<li class="nav-item"><a class="nav-link" href="/logout">Cerrar
+					sesión</a></li>
+		</ul>
+	</nav>
+
+	<div class="container mt-4">
+		<h2>Panel de Control de Administrador</h2>
+		<div class="row">
+			<div class="row-md-3">
+				<button onclick="mostrarLista('listaVentas')"
+					class="btn btn-primary btn-block">Ventas</button>
+
+			</div>
+			<div style="width: 10px">
+			</div>
+			<div class="row-md-3">
+				<button onclick="mostrarLista('listaCuentas')"
+					class="btn btn-primary btn-block">Cuentas</button>
+			</div>
+		</div>
+
+		<!-- Contenedor de la lista de Ventas -->
+		<div id="listaVentas" class="card">
+			<div class="card-header">
+				<h4 id="tituloLista">Lista de Ventas</h4>
+				<!-- Botón para generar el PDF con todas las ventas -->
+				<a th:href="@{/ventas/pdf}" target="_blank" class="btn btn-primary">Generar PDF
+					de Ventas</a>
+			</div>
+			<div class="card-body">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>ID Venta</th>
+							<th>Cantidad</th>
+							<th>Monto Total</th>
+							<th>Fecha de Venta</th>
+							<th>Correo de Cuenta</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="venta : ${lstVentas}">
+							<td th:text="${venta.ventaId}">ID Venta</td>
+							<td th:text="${venta.cantidad}">Cantidad</td>
+							<td th:text="${venta.montoTotal}">Monto Total</td>
+							<td th:text="${venta.fVenta}">Fecha de Venta</td>
+							<td
+								th:text="${venta.cuenta != null ? venta.cuenta.correo : 'No disponible'}">Correo
+								de Cuenta</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+
+		<!-- Contenedor de la lista de Cuentas -->
+		<div id="listaCuentas" class="card" style="display: none;">
+			<div class="card-header">
+				<h4 id="tituloListaCuentas">Lista de Cuentas</h4>
+			</div>
+			<div class="card-body">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>Correo</th>
+							<th>Rol</th>
+							<th>Acciones</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="cuenta : ${lstCuentas}">
+							<td th:text="${cuenta.correo}">Correo</td>
+							<td th:text="${cuenta.rol.nombre}">Rol</td>
+							<td>
+								<form
+									th:action="@{/actualizar/{correo}(correo=${cuenta.correo})}"
+									method="post" style="display: inline;">
+									<button type="submit" class="btn btn-warning btn-sm"
+										th:if="${cuenta.rol.rolId != 2}">Modificar a
+										Moderador</button>
+								</form> <a th:href="@{/eliminar/{correo}(correo=${cuenta.correo})}"
+								class="btn btn-danger btn-sm">Eliminar</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

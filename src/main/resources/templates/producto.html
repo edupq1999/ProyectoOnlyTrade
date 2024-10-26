@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Detalles del Producto</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<style>
+body {
+	background-color: #f8f9fa;
+}
+
+.card {
+	border: 1px solid #007bff;
+	border-radius: 15px;
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+	margin-top: 20px;
+}
+
+.card-title {
+	color: #007bff;
+	font-size: 1.5rem;
+	font-weight: bold;
+}
+
+.btn-primary {
+	background-color: #007bff;
+	border-color: #007bff;
+	transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+	background-color: #0056b3;
+	border-color: #0056b3;
+}
+
+.btn-secondary {
+	background-color: orangered;
+	border-color: orangered;
+}
+
+.btn-secondary:hover {
+	background-color: darkorange;
+	border-color: darkorange;
+}
+
+.container {
+	margin-top: 50px;
+}
+
+.product-image {
+	width: 100%;
+	height: auto;
+	border-radius: 15px;
+}
+
+.card-text {
+	color: #343a40;
+}
+
+.price {
+	font-size: 1.25rem;
+	font-weight: bold;
+	color: orangered;
+}
+
+.category {
+	font-style: italic;
+}
+</style>
+</head>
+<body>
+	<div class="container">
+		<h1 class="text-center text-primary">Detalles del Producto</h1>
+		<div class="card">
+
+			<div class="card-body">
+				<h5 class="card-title" th:text="${producto.nombre}">Nombre del
+					Producto</h5>
+				<p class="card-text" th:text="${producto.descripcion}">Descripción
+					del Producto</p>
+				<p class="card-text">
+					<strong class="price">Precio:</strong> S/. <span
+						th:text="${producto.precio}">0.00</span>
+				</p>
+				<p class="card-text">
+					<strong>Stock:</strong> <span th:text="${producto.stock}">0</span>
+				</p>
+				<p class="card-text">
+					<strong>Fecha de Entrada:</strong> <span
+						th:text="${#dates.format(producto.fEntrada, 'yyyy-MM-dd')}">Fecha</span>
+				</p>
+				<p class="card-text">
+					<strong>Categoría:</strong> <span class="category"
+						th:text="${producto.categoria.nombre}">Categoría</span>
+				</p>
+			</div>
+		</div>
+	</div>
+	<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

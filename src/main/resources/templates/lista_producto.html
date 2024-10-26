@@ -52,7 +52,8 @@ body {
 		<a class="navbar-brand" href="#">OnlyTrade</a>
 		<div class="collapse navbar-collapse justify-content-between">
 			<div class="collapse navbar-collapse justify-content-between">
-				<form class="form-inline" th:action="@{/home/buscarPorNombre/{cadena}(cadena=${cadena})}"
+				<form class="form-inline"
+					th:action="@{/home/buscarPorNombre/{cadena}(cadena=${cadena})}"
 					method="post">
 					<input class="form-control mr-sm-2" type="search"
 						placeholder="Buscar productos" aria-label="Search" name="cadena"
@@ -83,6 +84,7 @@ body {
 						</p>
 						<a th:href="@{/producto/{id}(id=${producto.productoId})}"
 							class="btn btn-primary">Ver Detalle</a>
+
 					</div>
 				</div>
 			</div>
